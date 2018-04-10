@@ -1,0 +1,42 @@
+{
+  "consumer": {
+    "name": "Consumer"
+  },
+  "provider": {
+    "name": "Provider"
+  },
+  "interactions": [
+    {
+      "description": "A request with a string",
+      "request": {
+        "method": "POST",
+        "path": "/uppercase",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "s": "hello, world"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "v": "HELLO, WORLD"
+        },
+        "matchingRules": {
+          "$.body": {
+            "match": "type"
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}
