@@ -73,7 +73,7 @@ func TestUpload(t *testing.T) {
 	err := p.Publish(types.PublishRequest{
 		PactURLs:        []string{filepath.FromSlash(fmt.Sprintf("%s/myconsumer-myprovider.json", pactDir))},
 		PactBroker:      "https://pact.halfpipe.io",
-		ConsumerVersion: "2.2.8",
+		ConsumerVersion: "2.2.9",
 		Tags:            []string{"latest", "stable"},
 		BrokerUsername:  os.Getenv("PACT_BROKER_USERNAME"),
 		BrokerPassword:  os.Getenv("PACT_BROKER_PASSWORD"),
