@@ -21,8 +21,8 @@ func TestConsumer(t *testing.T) {
 	// Create Pact connecting to local Daemon
 	pact := &dsl.Pact{
 		Port:     6666, // Ensure this port matches the daemon port!
-		Consumer: "MyConsumer",
-		Provider: "MyProvider",
+		Consumer: "Example-Consumer-A",
+		Provider: "Example-Provider",
 		Host:     "localhost",
 		PactDir: pactDir,
 	}
@@ -73,7 +73,7 @@ func TestUpload(t *testing.T) {
 	err := p.Publish(types.PublishRequest{
 		PactURLs:        []string{filepath.FromSlash(fmt.Sprintf("%s/myconsumer-myprovider.json", pactDir))},
 		PactBroker:      "https://pact.halfpipe.io",
-		ConsumerVersion: "2.2.9",
+		ConsumerVersion: "3.0.0",
 		Tags:            []string{"latest", "stable"},
 		BrokerUsername:  os.Getenv("PACT_BROKER_USERNAME"),
 		BrokerPassword:  os.Getenv("PACT_BROKER_PASSWORD"),

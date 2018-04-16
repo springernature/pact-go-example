@@ -22,8 +22,8 @@ func TestProvider(t *testing.T) {
 	// Create Pact connecting to local Daemon
 	pact := &dsl.Pact{
 		Port:     6666, // Ensure this port matches the daemon port!
-		Consumer: "MyConsumer",
-		Provider: "MyProvider",
+		Consumer: "Example-Consumer-A",
+		Provider: "Example-Provider",
 	}
 
 	go startInstrumentedProvider()
@@ -36,7 +36,7 @@ func TestProvider(t *testing.T) {
 		BrokerURL:              "https://pact.halfpipe.io",
 		ProviderStatesSetupURL: "http://localhost:8080/setup",
 		PublishVerificationResults: true,
-		ProviderVersion:            "1.0.3",
+		ProviderVersion:            "2.0.0",
 	})
 }
 
