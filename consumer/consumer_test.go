@@ -21,8 +21,8 @@ func TestConsumer(t *testing.T) {
 	// Create Pact connecting to local Daemon
 	pact := &dsl.Pact{
 		Port:     6666, // Ensure this port matches the daemon port!
-		Consumer: "Consumer",
-		Provider: "Provider",
+		Consumer: "MyConsumer",
+		Provider: "MyProvider",
 		Host:     "localhost",
 	}
 	defer pact.Teardown()
@@ -44,7 +44,7 @@ func TestConsumer(t *testing.T) {
 		return err
 	}
 
-	body := dsl.Like(fmt.Sprintf(`{"v":"%s"}`, "HELLO, WORLD"))
+	//body := dsl.Like(fmt.Sprintf(, "HELLO, WORLDX"))
 
 	// Set up our expected interactions.
 	pact.
@@ -59,7 +59,7 @@ func TestConsumer(t *testing.T) {
 		WillRespondWith(dsl.Response{
 		Status:  200,
 		Headers: map[string]string{"Content-Type": "application/json"},
-		Body:    body,
+		Body:    `{"v":"HELLO, WORLD"}`,
 	})
 
 	// Verify
@@ -71,8 +71,8 @@ func TestConsumer(t *testing.T) {
 	p := dsl.Publisher{}
 	err := p.Publish(types.PublishRequest{
 		PactURLs:        []string{filepath.FromSlash(fmt.Sprintf("%s/consumer-provider.json", pactDir))},
-		PactBroker:      "http://localhost",
-		ConsumerVersion: "2.2.2",
+		PactBroker:      "https://pact.halfpipe.io",
+		ConsumerVersion: "2.2.4",
 		Tags:            []string{"latest", "stable"},
 		BrokerUsername:  os.Getenv("PACT_BROKER_USERNAME"),
 		BrokerPassword:  os.Getenv("PACT_BROKER_PASSWORD"),

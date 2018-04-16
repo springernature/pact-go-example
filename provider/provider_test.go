@@ -33,10 +33,10 @@ func TestProvider(t *testing.T) {
 
 	pact.VerifyProvider(t, types.VerifyRequest{
 		ProviderBaseURL:        "http://localhost:8080",
-		BrokerURL:              "http://localhost",
+		BrokerURL:              "https://pact.halfpipe.io",
 		ProviderStatesSetupURL: "http://localhost:8080/setup",
 		PublishVerificationResults: true,
-		ProviderVersion:            "1.0.0",
+		ProviderVersion:            "1.0.2",
 	})
 }
 
