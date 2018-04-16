@@ -22,8 +22,8 @@ func TestProvider(t *testing.T) {
 	// Create Pact connecting to local Daemon
 	pact := &dsl.Pact{
 		Port:     6666, // Ensure this port matches the daemon port!
-		Consumer: "Consumer",
-		Provider: "Provider",
+		Consumer: "MyConsumer",
+		Provider: "MyProvider",
 	}
 
 	go startInstrumentedProvider()

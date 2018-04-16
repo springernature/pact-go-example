@@ -1,0 +1,33 @@
+# Generated using halfpipe cli version 1.24.5
+groups: []
+resources:
+- name: pact-go-example
+  type: git
+  source:
+    uri: https://github.com/hprotzek/pact-go-example.git
+resource_types: []
+jobs:
+- name: provider-test
+  serial: true
+  plan:
+  - get: pact-go-example
+    trigger: true
+  - task: run
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: golang
+          tag: 1.10-stretch
+      run:
+        path: /bin/sh
+        args:
+        - -ec
+        - |-
+          find .
+          ./pact-go-example/provider/test.sh
+      inputs:
+      - name: pact-go-example
+        path: ""
+
