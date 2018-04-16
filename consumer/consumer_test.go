@@ -45,8 +45,6 @@ func TestConsumer(t *testing.T) {
 		return err
 	}
 
-	//body := dsl.Like(fmt.Sprintf(, "HELLO, WORLDX"))
-
 	// Set up our expected interactions.
 	pact.
 		AddInteraction().
@@ -68,12 +66,14 @@ func TestConsumer(t *testing.T) {
 		log.Fatalf("Error on Verify: %v", err)
 	}
 
+	pact.Teardown()
+
 	// Publish the Pacts...
 	p := dsl.Publisher{}
 	err := p.Publish(types.PublishRequest{
 		PactURLs:        []string{filepath.FromSlash(fmt.Sprintf("%s/myconsumer-myprovider.json", pactDir))},
 		PactBroker:      "https://pact.halfpipe.io",
-		ConsumerVersion: "2.2.5",
+		ConsumerVersion: "2.2.6",
 		Tags:            []string{"latest", "stable"},
 		BrokerUsername:  os.Getenv("PACT_BROKER_USERNAME"),
 		BrokerPassword:  os.Getenv("PACT_BROKER_PASSWORD"),
