@@ -24,6 +24,7 @@ func TestConsumer(t *testing.T) {
 		Consumer: "MyConsumer",
 		Provider: "MyProvider",
 		Host:     "localhost",
+		PactDir: pactDir,
 	}
 	defer pact.Teardown()
 
