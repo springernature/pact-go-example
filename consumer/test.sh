@@ -13,7 +13,7 @@ echo ""
 export GOPATH=$PWD
 
 mkdir -p src/github.com/springernature/
-cp -R ./hello-go src/github.com/springernature/.
+cp -R ./pact-go-example src/github.com/springernature/.
 cd src/github.com/springernature/pact-go-example
 
 go test
