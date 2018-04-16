@@ -70,7 +70,7 @@ func TestConsumer(t *testing.T) {
 	// Publish the Pacts...
 	p := dsl.Publisher{}
 	err := p.Publish(types.PublishRequest{
-		PactURLs:        []string{filepath.FromSlash(fmt.Sprintf("%s/consumer-provider.json", pactDir))},
+		PactURLs:        []string{filepath.FromSlash(fmt.Sprintf("%s/myconsumer-myprovider.json", pactDir))},
 		PactBroker:      "https://pact.halfpipe.io",
 		ConsumerVersion: "2.2.5",
 		Tags:            []string{"latest", "stable"},
