@@ -8,9 +8,9 @@ import (
 	"github.com/pact-foundation/pact-go/dsl"
 	"bytes"
 	"fmt"
+	"os"
 	"github.com/pact-foundation/pact-go/types"
 	"path/filepath"
-	"os"
 )
 
 var dir, _ = os.Getwd()
@@ -65,15 +65,15 @@ func TestConsumer(t *testing.T) {
 	if err := pact.Verify(test); err != nil {
 		log.Fatalf("Error on Verify: %v", err)
 	}
+}
 
-	pact.Teardown()
-
+func TestUpload(t *testing.T) {
 	// Publish the Pacts...
 	p := dsl.Publisher{}
 	err := p.Publish(types.PublishRequest{
 		PactURLs:        []string{filepath.FromSlash(fmt.Sprintf("%s/myconsumer-myprovider.json", pactDir))},
 		PactBroker:      "https://pact.halfpipe.io",
-		ConsumerVersion: "2.2.6",
+		ConsumerVersion: "2.2.8",
 		Tags:            []string{"latest", "stable"},
 		BrokerUsername:  os.Getenv("PACT_BROKER_USERNAME"),
 		BrokerPassword:  os.Getenv("PACT_BROKER_PASSWORD"),
