@@ -8,7 +8,7 @@ resources:
 - name: pact-go-example
   type: git
   source:
-    uri: https://github.com/hprotzek/pact-go-example.git
+    uri: git@github.com:springernature/pact-go-example.git
     paths:
       - provider/**
 - name: pact-consumer-a
