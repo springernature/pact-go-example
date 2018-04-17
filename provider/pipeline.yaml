@@ -10,12 +10,17 @@ resources:
   source:
     uri: https://github.com/hprotzek/pact-go-example.git
     paths:
-      - provider
+      - provider/**
 - name: pact-consumer-a
   type: pact-broker
   source:
     pact_broker_url: https://pact.halfpipe.io
     pacticipant: Example-Consumer-A
+- name: pact-consumer-b
+  type: pact-broker
+  source:
+    pact_broker_url: https://pact.halfpipe.io
+    pacticipant: Example-Consumer-B
 jobs:
 - name: provider-test
   serial: true
@@ -23,6 +28,8 @@ jobs:
   - get: pact-go-example
     trigger: true
   - get: pact-consumer-a
+    trigger: true
+  - get: pact-consumer-b
     trigger: true
   - task: run
     config:

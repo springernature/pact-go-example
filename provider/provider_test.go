@@ -20,9 +20,15 @@ import (
 func TestProvider(t *testing.T) {
 
 	// Create Pact connecting to local Daemon
-	pact := &dsl.Pact{
+	pactA := &dsl.Pact{
 		Port:     6666, // Ensure this port matches the daemon port!
 		Consumer: "Example-Consumer-A",
+		Provider: "Example-Provider",
+	}
+
+	pactB := &dsl.Pact{
+		Port:     6666, // Ensure this port matches the daemon port!
+		Consumer: "Example-Consumer-B",
 		Provider: "Example-Provider",
 	}
 
@@ -31,13 +37,22 @@ func TestProvider(t *testing.T) {
 	//// Start provider API in the background
 	//go startServer()
 
-	pact.VerifyProvider(t, types.VerifyRequest{
+	pactA.VerifyProvider(t, types.VerifyRequest{
 		ProviderBaseURL:        "http://localhost:8080",
 		BrokerURL:              "https://pact.halfpipe.io",
 		ProviderStatesSetupURL: "http://localhost:8080/setup",
 		PublishVerificationResults: true,
 		ProviderVersion:            "2.0.1",
 	})
+
+	pactB.VerifyProvider(t, types.VerifyRequest{
+		ProviderBaseURL:        "http://localhost:8080",
+		BrokerURL:              "https://pact.halfpipe.io",
+		ProviderStatesSetupURL: "http://localhost:8080/setup",
+		PublishVerificationResults: true,
+		ProviderVersion:            "2.0.1",
+	})
+
 }
 
 func startInstrumentedProvider() {

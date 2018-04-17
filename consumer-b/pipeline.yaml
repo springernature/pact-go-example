@@ -1,0 +1,32 @@
+resources:
+- name: pact-go-example
+  type: git
+  source:
+    uri: https://github.com/hprotzek/pact-go-example.git
+    paths:
+      - consumer-b/**
+resource_types: []
+jobs:
+- name: consumer-b-test
+  serial: true
+  plan:
+  - get: pact-go-example
+    trigger: true
+  - task: run
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: golang
+          tag: 1.10-stretch
+      run:
+        path: /bin/sh
+        args:
+        - -ec
+        - |-
+          ./pact-go-example/consumer-b/test.sh
+      inputs:
+      - name: pact-go-example
+        path: ""
+

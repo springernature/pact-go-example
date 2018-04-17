@@ -4,10 +4,10 @@ resources:
   source:
     uri: https://github.com/hprotzek/pact-go-example.git
     paths:
-      - consumer
+      - consumer-a/**
 resource_types: []
 jobs:
-- name: consumer-test
+- name: consumer-a-test
   serial: true
   plan:
   - get: pact-go-example
@@ -25,7 +25,7 @@ jobs:
         args:
         - -ec
         - |-
-          ./pact-go-example/consumer/test.sh
+          ./pact-go-example/consumer-a/test.sh
       inputs:
       - name: pact-go-example
         path: ""
