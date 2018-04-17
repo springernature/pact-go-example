@@ -1,4 +1,3 @@
-# Generated using halfpipe cli version 1.24.5
 resource_types:
 - name: pact-broker
   type: docker-image
@@ -10,6 +9,8 @@ resources:
   type: git
   source:
     uri: https://github.com/hprotzek/pact-go-example.git
+    paths:
+      - provider
 - name: pact-consumer-a
   type: pact-broker
   source:
