@@ -37,7 +37,6 @@ jobs:
         args:
         - -ec
         - |-
-          find .
           ./pact-go-example/provider/test.sh
       inputs:
       - name: pact-go-example

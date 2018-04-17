@@ -36,7 +36,7 @@ func TestProvider(t *testing.T) {
 		BrokerURL:              "https://pact.halfpipe.io",
 		ProviderStatesSetupURL: "http://localhost:8080/setup",
 		PublishVerificationResults: true,
-		ProviderVersion:            "2.0.0",
+		ProviderVersion:            "2.0.1",
 	})
 }
 
