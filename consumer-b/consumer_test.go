@@ -58,7 +58,7 @@ func TestConsumer(t *testing.T) {
 		WillRespondWith(dsl.Response{
 		Status:  200,
 		Headers: map[string]string{"Content-Type": "application/json"},
-		Body:    `{"v":"HELLO, WORLD"}`,
+		Body:    `{"v":"HELLO, EE"}`,
 	})
 
 	// Verify
@@ -73,7 +73,7 @@ func TestUpload(t *testing.T) {
 	err := p.Publish(types.PublishRequest{
 		PactURLs:        []string{filepath.FromSlash(fmt.Sprintf("%s/example-consumer-b-example-provider.json", pactDir))},
 		PactBroker:      "https://pact.halfpipe.io",
-		ConsumerVersion: "1.0.14",
+		ConsumerVersion: "2.0.14",
 		Tags:            []string{"latest", "stable"},
 		BrokerUsername:  os.Getenv("PACT_BROKER_USERNAME"),
 		BrokerPassword:  os.Getenv("PACT_BROKER_PASSWORD"),

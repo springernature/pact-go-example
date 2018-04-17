@@ -3,6 +3,7 @@ resources:
   type: git
   source:
     uri: git@github.com:springernature/pact-go-example.git
+    private_key: ((github.private_key))
     paths:
       - consumer-b/**
 resource_types: []
