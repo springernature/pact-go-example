@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "pact-broker.fullname" . }}
+  labels:
+    app: {{ template "pact-broker.name" . }}
+    chart: {{ template "pact-broker.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: {{ template "pact-broker.name" . }}
+    release: {{ .Release.Name }}
