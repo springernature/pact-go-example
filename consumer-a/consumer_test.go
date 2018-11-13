@@ -5,11 +5,11 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/pact-foundation/pact-go/dsl"
 	"bytes"
 	"fmt"
-	"os"
+	"github.com/pact-foundation/pact-go/dsl"
 	"github.com/pact-foundation/pact-go/types"
+	"os"
 	"path/filepath"
 )
 
@@ -24,7 +24,7 @@ func TestConsumer(t *testing.T) {
 		Consumer: "Example-Consumer-A",
 		Provider: "Example-Provider",
 		Host:     "localhost",
-		PactDir: pactDir,
+		PactDir:  pactDir,
 	}
 	defer pact.Teardown()
 
@@ -50,16 +50,31 @@ func TestConsumer(t *testing.T) {
 		AddInteraction().
 		UponReceiving("A request with a string").
 		WithRequest(dsl.Request{
-		Method:  "POST",
-		Path:    "/uppercase",
-		Headers: map[string]string{"Content-Type": "application/json"},
-		Body:    `{"s":"hello, world"}`,
-	}).
+			Method:  "POST",
+			Path:    "/uppercase",
+			Headers: map[string]string{"Content-Type": "application/json"},
+			Body:    `{"s":"hello, world"}`,
+		}).
 		WillRespondWith(dsl.Response{
-		Status:  200,
-		Headers: map[string]string{"Content-Type": "application/json"},
-		Body:    `{"v":"HELLO, WORLD"}`,
-	})
+			Status:  200,
+			Headers: map[string]string{"Content-Type": "application/json"},
+			Body:    `{"v":"HELLO, WORLD"}`,
+		})
+
+	pact.
+		AddInteraction().
+		UponReceiving("A request with a string").
+		WithRequest(dsl.Request{
+			Method:  "POST",
+			Path:    "/uppercase",
+			Headers: map[string]string{"Content-Type": "application/json"},
+			Body:    `{"s":"hello, holger"}`,
+		}).
+		WillRespondWith(dsl.Response{
+			Status:  200,
+			Headers: map[string]string{"Content-Type": "application/json"},
+			Body:    `{"v":"HELLO, HOLGER"}`,
+		})
 
 	// Verify
 	if err := pact.Verify(test); err != nil {
