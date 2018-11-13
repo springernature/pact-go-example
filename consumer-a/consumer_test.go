@@ -61,21 +61,6 @@ func TestConsumer(t *testing.T) {
 			Body:    `{"v":"HELLO, WORLD"}`,
 		})
 
-	pact.
-		AddInteraction().
-		UponReceiving("A request with a string").
-		WithRequest(dsl.Request{
-			Method:  "POST",
-			Path:    "/uppercase",
-			Headers: map[string]string{"Content-Type": "application/json"},
-			Body:    `{"s":"hello, holger"}`,
-		}).
-		WillRespondWith(dsl.Response{
-			Status:  200,
-			Headers: map[string]string{"Content-Type": "application/json"},
-			Body:    `{"v":"HELLO, HOLGER"}`,
-		})
-
 	// Verify
 	if err := pact.Verify(test); err != nil {
 		log.Fatalf("Error on Verify: %v", err)
@@ -88,7 +73,7 @@ func TestUpload(t *testing.T) {
 	err := p.Publish(types.PublishRequest{
 		PactURLs:        []string{filepath.FromSlash(fmt.Sprintf("%s/example-consumer-a-example-provider.json", pactDir))},
 		PactBroker:      "https://pact.halfpipe.io",
-		ConsumerVersion: "3.0.6",
+		ConsumerVersion: "3.0.7",
 		Tags:            []string{"latest", "stable"},
 		BrokerUsername:  os.Getenv("PACT_BROKER_USERNAME"),
 		BrokerPassword:  os.Getenv("PACT_BROKER_PASSWORD"),
