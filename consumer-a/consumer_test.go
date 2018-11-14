@@ -30,7 +30,7 @@ func TestConsumer(t *testing.T) {
 
 	// Pass in test case
 	var test = func() error {
-		var jsonStr = []byte(`{"s":"hello, world"}`)
+		var jsonStr = []byte(`{"s":"hello, worldd"}`)
 		u := fmt.Sprintf("http://localhost:%d/uppercase", pact.Server.Port)
 		req, err := http.NewRequest("POST", u, bytes.NewBuffer(jsonStr))
 		if err != nil {
