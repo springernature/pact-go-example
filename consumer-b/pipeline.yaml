@@ -27,6 +27,9 @@ jobs:
         - -ec
         - |-
           ./pact-go-example/consumer-b/test.sh
+      params:
+        PACT_BROKER_USERNAME: ((pact.username))
+        PACT_BROKER_PASSWORD: ((pact.password))
       inputs:
       - name: pact-go-example
         path: ""

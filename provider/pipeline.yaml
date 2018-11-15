@@ -2,8 +2,10 @@ resource_types:
 - name: pact-broker
   type: docker-image
   source:
-    repository: platformengineering/concourse-pact-broker-resource
+    repository: eu.gcr.io/halfpipe-io/pact-broker-resource
+    password: ((gcr.private_key))
     tag: latest
+    username: _json_key
 resources:
 - name: pact-go-example
   type: git
@@ -12,25 +14,20 @@ resources:
     private_key: ((github.private_key))
     paths:
       - provider/**
-- name: pact-consumer-a
+- name: pact-broker-trigger
   type: pact-broker
   source:
     pact_broker_url: https://pact.halfpipe.io
-    pacticipant: Example-Consumer-A
-- name: pact-consumer-b
-  type: pact-broker
-  source:
-    pact_broker_url: https://pact.halfpipe.io
-    pacticipant: Example-Consumer-B
+    username: ((pact.username))
+    password: ((pact.password))
+    provider: Example-Provider
 jobs:
 - name: provider-test
   serial: true
   plan:
   - get: pact-go-example
     trigger: true
-  - get: pact-consumer-a
-    trigger: true
-  - get: pact-consumer-b
+  - get: pact-broker-trigger
     trigger: true
   - task: run
     config:
@@ -46,6 +43,9 @@ jobs:
         - -ec
         - |-
           ./pact-go-example/provider/test.sh
+      params:
+        PACT_BROKER_USERNAME: ((pact.username))
+        PACT_BROKER_PASSWORD: ((pact.password))
       inputs:
       - name: pact-go-example
         path: ""

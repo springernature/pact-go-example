@@ -43,6 +43,8 @@ func TestProvider(t *testing.T) {
 		ProviderStatesSetupURL: "http://localhost:8080/setup",
 		PublishVerificationResults: true,
 		ProviderVersion:            "2.0.1",
+		BrokerUsername:  os.Getenv("PACT_BROKER_USERNAME"),
+		BrokerPassword:  os.Getenv("PACT_BROKER_PASSWORD"),
 	})
 
 	pactB.VerifyProvider(t, types.VerifyRequest{
@@ -51,6 +53,8 @@ func TestProvider(t *testing.T) {
 		ProviderStatesSetupURL: "http://localhost:8080/setup",
 		PublishVerificationResults: true,
 		ProviderVersion:            "2.0.1",
+		BrokerUsername:  os.Getenv("PACT_BROKER_USERNAME"),
+		BrokerPassword:  os.Getenv("PACT_BROKER_PASSWORD"),
 	})
 
 }
