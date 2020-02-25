@@ -4,7 +4,7 @@ resources:
   check_every: 10m
   source:
     uri: git@github.com:springernature/pact-go-example.git
-    private_key: ((github.private_key))
+    private_key: ((halfpipe-github.private_key))
     paths:
       - consumer-a/**
 resource_types: []
